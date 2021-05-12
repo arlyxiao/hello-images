@@ -1,11 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
+
 
 const MainSearch = function({ handleSearch }) {
+  const [value, setInputValue] = useState("");
+
+  const handleOnChange = event => {
+    event.preventDefault();
+    setInputValue(event.target.value);
+
+    const currentQuery = {q: encodeURIComponent(event.target.value)}
+    handleSearch(currentQuery);
+  };
+
   return (
-    <div className="search-panel">
+    <div className="main-search">
       <h2></h2>
       <div className="input-wrapper">
-        <input type="text" onClick={handleSearch} />
+        <input
+          type="text"
+          value={value}
+          onChange={handleOnChange} />
       </div>
     </div>
   );

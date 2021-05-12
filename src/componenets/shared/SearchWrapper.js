@@ -1,5 +1,5 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 import * as DataLoader from "../../services/DataLoader";
 
@@ -8,25 +8,29 @@ const SearchWrapper = function({ Component }) {
 
   let timerId;
   const dispatch = useDispatch();
+  let queryParams = useSelector((state) => state.queryParams);
 
-  const makeAPICall = function() {
-    DataLoader.doFetch(DataLoader.url, function(result) {
-      dispatch({
-        type: 'merge',
-        value: result
-      });
-    });
-  }
+  function handleSearch(currentQuery) {
+    queryParams = Object.assign({}, queryParams, currentQuery);
+    const queryText = DataLoader.buildQueryText(queryParams);
+    const url =  `${DataLoader.baseUrl}${queryText}`;
 
-  const debounceAPICall = function(callback, delay) {
     clearTimeout(timerId);
     timerId  =  setTimeout(function() {
-      callback();
-    }, delay);
-  }
+      console.log(url);
 
-  function handleSearch() {
-    debounceAPICall(makeAPICall, 500);
+      dispatch({
+        type: "merge_query",
+        value: currentQuery
+      });
+
+      DataLoader.doFetch(url, function(result) {
+        dispatch({
+          type: "merge_images",
+          value: result
+        });
+      });
+    }, 500);
   }
 
   return (

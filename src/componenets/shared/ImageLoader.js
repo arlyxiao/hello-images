@@ -1,7 +1,8 @@
 import React from "react";
 
+
 const ImageLoader = function(props) {
-  let listItems = '';
+  let listItems = "";
 
   try {
     listItems = props.images.map((image) =>
