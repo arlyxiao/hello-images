@@ -1,7 +1,7 @@
 
 import React from "react";
 
-import Search from "./componenets/Search";
+import Main from "./componenets/Main";
 
 
 class App extends React.Component {
@@ -10,7 +10,7 @@ class App extends React.Component {
 
     return (
       <>
-        <Search />
+        <Main />
       </>
     );
   }
