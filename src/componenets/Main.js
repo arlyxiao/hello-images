@@ -27,7 +27,9 @@ const Search = () => {
         </div>
       </section>
 
-      <ImageLoader images={imageData.hits} />
+      <section className="image-list">
+        <ImageLoader images={imageData.hits} />
+      </section>
 
     </BaseLayout>
   )

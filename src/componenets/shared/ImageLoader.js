@@ -7,7 +7,13 @@ const ImageLoader = function(props) {
   try {
     listItems = props.images.map((image) =>
       <li key={image.largeImageURL}>
-        { image.largeImageURL }
+        <img src={ image.userImageURL } />
+        <span className="views">
+          { `${image.views} Views` }
+        </span>
+        <span className="likes">
+          { `${image.likes} Likes` }
+        </span>
       </li>
     );
   } catch (error) {

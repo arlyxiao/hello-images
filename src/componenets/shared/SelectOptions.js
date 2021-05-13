@@ -63,9 +63,9 @@ const SelectListLoader = function(props) {
 };
 
 const SelectOptions = function({ handleSearch, optionsData }) {
-  const [currentMomemnt, setCurrentMoment] = useState('');
+  const [currentMomemnt, setCurrentMoment] = useState("");
   const [hide, setHide] = useState(true);
-  const [selectedValue, setSelectedValue] = useState(optionsData.default);
+  const [selectedValue, setSelectedValue] = useState("");
 
   const toggleSelect = function(event) {
     hide ? setHide(false) : setHide(true);
@@ -88,7 +88,7 @@ const SelectOptions = function({ handleSearch, optionsData }) {
         <div className="input-wrapper">
           <input
             type="text"
-            placeholder="Select Category"
+            placeholder="---Select---"
             readOnly="readonly"
             value={selectedValue}
             onClick={ (event) => toggleSelect(event) } />

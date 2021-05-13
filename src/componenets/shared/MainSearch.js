@@ -14,7 +14,6 @@ const MainSearch = function({ handleSearch }) {
 
   return (
     <div className="main-search">
-      <h2></h2>
       <div className="input-wrapper">
         <input
           type="text"

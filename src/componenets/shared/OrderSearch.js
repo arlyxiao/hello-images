@@ -7,7 +7,7 @@ const OrderSearch = function({ handleSearch }) {
 
   const optionsData = {
     key: "order",
-    Label: "Order",
+    label: "Order",
     default: "popular",
     items: {
       popular: "active",
