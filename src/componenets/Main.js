@@ -5,7 +5,8 @@ import BaseLayout from "./layouts/BaseLayout";
 import SearchWrapper from "./shared/SearchWrapper";
 import ImageLoader from "./shared/ImageLoader";
 import MainSearch from "./shared/MainSearch";
-import OptionalSearch from "./shared/OptionalSearch";
+import CategorySearch from "./shared/CategorySearch";
+import OrderSearch from "./shared/OrderSearch";
 
 
 const Search = () => {
@@ -19,7 +20,11 @@ const Search = () => {
 
       <section className="search">
         <SearchWrapper Component={MainSearch} />
-        <SearchWrapper Component={OptionalSearch} />
+
+        <div className="optional-search">
+          <SearchWrapper Component={CategorySearch} />
+          <SearchWrapper Component={OrderSearch} />
+        </div>
       </section>
 
       <ImageLoader images={imageData.hits} />

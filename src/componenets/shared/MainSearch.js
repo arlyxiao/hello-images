@@ -18,6 +18,7 @@ const MainSearch = function({ handleSearch }) {
       <div className="input-wrapper">
         <input
           type="text"
+          placeholder="Start image searching"
           value={value}
           onChange={handleOnChange} />
       </div>

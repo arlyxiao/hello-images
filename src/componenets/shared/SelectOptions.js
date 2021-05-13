@@ -1,11 +1,18 @@
-import React, { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import React, { useState, useRef } from "react";
 
 
 const SelectListLoader = function(props) {
   const [hide, setHide] = useState(true);
   const [selectList, setSelectList] = useState({});
+  const node = useRef(null);
   let listItems = "";
+
+  const handleClick = event => {
+    if (node.current.contains(event.target)) {
+      return;
+    }
+    setHide(true);
+  };
 
   React.useEffect(() => {
     hide ? setHide(false) : setHide(true);
@@ -13,7 +20,13 @@ const SelectListLoader = function(props) {
 
   React.useEffect(() => {
     setHide(true);
-    setSelectList(props.selectList);
+    setSelectList(props.optionsData.items);
+
+    document.addEventListener("mousedown", handleClick);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClick);
+    };
   }, []);
 
   function handleSelect(selectList, selectKey) {
@@ -43,65 +56,52 @@ const SelectListLoader = function(props) {
   }
 
   return (
-    <ul className={`${hide ? "hide" : ""}`}>
+    <ul className={`${hide ? "hide" : ""}`} ref={node}>
       {listItems}
     </ul>
   );
 };
 
-const OptionalSearch = function({ handleSearch }) {
+const SelectOptions = function({ handleSearch, optionsData }) {
   const [currentMomemnt, setCurrentMoment] = useState('');
   const [hide, setHide] = useState(true);
-  const [selectedValue, setSelectedValue] = useState('');
-
-  const selectList = {
-    All: "",
-    Animals: "",
-    Travel: ""
-  };
+  const [selectedValue, setSelectedValue] = useState(optionsData.default);
 
   const toggleSelect = function(event) {
-    event.stopPropagation();
-
     hide ? setHide(false) : setHide(true);
     setCurrentMoment(new Date().getTime());
   };
 
   const handleChange = value => {
     setSelectedValue(value);
-    const selectedCategory = value === "all" ? "" : encodeURIComponent(value.toLowerCase());
+    const selectedCategory = value === "all" ? "" : encodeURIComponent(value);
 
-    const currentQuery = {category: selectedCategory};
+    const currentQuery = {[optionsData.key]: selectedCategory};
     handleSearch(currentQuery);
   };
 
   return (
-    <div className="optional-search">
-      <h4>More Options</h4>
+    <div className="select-panel">
+      <label>{ optionsData.label }</label>
 
-      <div className="category select-panel">
-        <label>Category</label>
+      <main>
+        <div className="input-wrapper">
+          <input
+            type="text"
+            placeholder="Select Category"
+            readOnly="readonly"
+            value={selectedValue}
+            onClick={ (event) => toggleSelect(event) } />
+        </div>
 
-        <main>
-          <div className="input-wrapper">
-            <input
-              type="text"
-              placeholder="Select Category"
-              readOnly="readonly"
-              value={selectedValue}
-              onClick={ (event) => toggleSelect(event) } />
-          </div>
-
-          <SelectListLoader
-            selectList={selectList}
-            currentMomemnt={currentMomemnt}
-            handleChange={handleChange} />
-        </main>
-
-      </div>
+        <SelectListLoader
+          optionsData={optionsData}
+          currentMomemnt={currentMomemnt}
+          handleChange={handleChange} />
+      </main>
 
     </div>
   );
 };
 
-export default OptionalSearch;
+export default SelectOptions;
