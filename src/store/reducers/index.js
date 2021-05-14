@@ -2,18 +2,17 @@ import { combineReducers } from 'redux';
 
 
 const images = (state = {}, action) => {
-  if (action.type === "merge_images") {
-    const data =  {
-      ...state,
-      ...action.value
-    }
+  switch (action.type) {
+    case "first_loading":
+      return action.value;
 
-    return data;
+    case "merge_images":
+      return [...state, ...action.value];
+
+    default:
+      return state;
   }
-
-  return state;
 };
-
 
 const queryParams = (state = {}, action) => {
   if (action.type === "merge_query") {
@@ -23,10 +22,25 @@ const queryParams = (state = {}, action) => {
   return state;
 };
 
+const currentPage = (state = 1, action) => {
+
+  switch (action.type) {
+    case "start_page":
+      return 1;
+
+    case "increase_page":
+      return action.value + 1;
+
+    default:
+      return state;
+  }
+};
+
 
 const rootReducer = combineReducers({
   images,
-  queryParams
+  queryParams,
+  currentPage
 });
 
 

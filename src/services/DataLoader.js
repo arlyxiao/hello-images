@@ -18,7 +18,7 @@ export const doFetch = function(url, success, error) {
       .then(res => res.json())
       .then(
         (result) => {
-          // console.log(result);
+          console.log(result);
           if (typeof success === "function") {
             success(result);
           }

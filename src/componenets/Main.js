@@ -19,7 +19,7 @@ const Search = () => {
     <BaseLayout>
 
       <section className="search">
-        <SearchWrapper Component={MainSearch} />
+        <SearchWrapper Component={MainSearch} hasInfiniteScrolling={true} />
 
         <div className="optional-search">
           <SearchWrapper Component={CategorySearch} />
@@ -28,7 +28,7 @@ const Search = () => {
       </section>
 
       <section className="image-list">
-        <ImageLoader images={imageData.hits} />
+        <ImageLoader images={imageData} />
       </section>
 
     </BaseLayout>

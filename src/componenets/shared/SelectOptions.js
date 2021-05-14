@@ -73,11 +73,13 @@ const SelectOptions = function({ handleSearch, optionsData }) {
   };
 
   const handleChange = value => {
-    setSelectedValue(value);
+    const queryChanged = value !== selectedValue;
     const selectedCategory = value === "all" ? "" : encodeURIComponent(value);
 
     const currentQuery = {[optionsData.key]: selectedCategory};
-    handleSearch(currentQuery);
+    setSelectedValue(value);
+
+    handleSearch(currentQuery, queryChanged);
   };
 
   return (
