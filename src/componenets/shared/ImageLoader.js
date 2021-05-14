@@ -19,8 +19,16 @@ const ImageLoader = function(props) {
   } catch (error) {
   }
 
+  const Images = function() {
+    return (
+      <ul>{listItems}</ul>
+    );
+  }
+
   return (
-    <ul>{listItems}</ul>
+    <>
+      <Images />
+    </>
   );
 };
 
