@@ -7,13 +7,6 @@ const SelectListLoader = function(props) {
   const node = useRef(null);
   let listItems = "";
 
-  const handleClick = event => {
-    if (node.current.contains(event.target)) {
-      return;
-    }
-    setHide(true);
-  };
-
   React.useEffect(() => {
     hide ? setHide(false) : setHide(true);
   }, [props.currentMomemnt]);
@@ -29,7 +22,26 @@ const SelectListLoader = function(props) {
     };
   }, []);
 
-  function handleSelect(selectList, selectKey) {
+  const showSelectLabel = function() {
+    if (props.selectedValue) {
+      return `${props.optionsData.label}: ${props.selectedValue}`;
+    }
+
+    return `Select ${props.optionsData.label}`;
+  };
+
+  const handleClick = event => {
+    if (node.current.contains(event.target)) {
+      return;
+    }
+    setHide(true);
+  };
+
+  const toggleSelect = function() {
+    hide ? setHide(false) : setHide(true);
+  };
+
+  const handleSelect = function(selectList, selectKey) {
     let data = {};
     Object.keys(selectList).forEach(function(key) {
       data[key] = "";
@@ -47,7 +59,7 @@ const SelectListLoader = function(props) {
     listItems = Object.keys(selectList).map((selectKey) =>
       <li
         key={selectKey}
-        className={`${selectList[selectKey]}`}
+        className={`${selectList[selectKey]} ${hide ? "hide" : ""}`}
         onClick={ () => handleSelect(selectList, selectKey) }>
           { selectKey }
       </li>
@@ -56,27 +68,24 @@ const SelectListLoader = function(props) {
   }
 
   return (
-    <ul className={`${hide ? "hide" : ""}`} ref={node}>
+    <ul ref={node}>
+      <li key="first-li" className="first-li" onClick={ () => toggleSelect() }>
+        {`${showSelectLabel()}`}
+      </li>
       {listItems}
     </ul>
   );
 };
 
 const SelectOptions = function({ handleSearch, optionsData }) {
-  const [currentMomemnt, setCurrentMoment] = useState("");
-  const [hide, setHide] = useState(true);
   const [selectedValue, setSelectedValue] = useState("");
-
-  const toggleSelect = function(event) {
-    hide ? setHide(false) : setHide(true);
-    setCurrentMoment(new Date().getTime());
-  };
+  const currentMoment = new Date().getTime();
 
   const handleChange = value => {
     const queryChanged = value !== selectedValue;
-    const selectedCategory = value === "all" ? "" : encodeURIComponent(value);
+    const selectedQuery = value === "all" ? "" : encodeURIComponent(value);
 
-    const currentQuery = {[optionsData.key]: selectedCategory};
+    const currentQuery = {[optionsData.key]: selectedQuery};
     setSelectedValue(value);
 
     handleSearch(currentQuery, queryChanged);
@@ -84,23 +93,11 @@ const SelectOptions = function({ handleSearch, optionsData }) {
 
   return (
     <div className="select-panel">
-      <label>{ optionsData.label }</label>
-
-      <main>
-        <div className="input-wrapper">
-          <input
-            type="text"
-            placeholder="---Select---"
-            readOnly="readonly"
-            value={selectedValue}
-            onClick={ (event) => toggleSelect(event) } />
-        </div>
-
-        <SelectListLoader
+      <SelectListLoader
           optionsData={optionsData}
-          currentMomemnt={currentMomemnt}
+          currentMoment={currentMoment}
+          selectedValue={selectedValue}
           handleChange={handleChange} />
-      </main>
 
     </div>
   );
