@@ -4,12 +4,13 @@ import React, { useState } from "react";
 const MainSearch = function({ handleSearch }) {
   const [value, setInputValue] = useState("");
 
-  const handleOnChange = event => {
+  const handleChange = event => {
     event.preventDefault();
+    const queryChanged = event.target.value !== value;
     setInputValue(event.target.value);
 
     const currentQuery = {q: encodeURIComponent(event.target.value)}
-    handleSearch(currentQuery);
+    handleSearch(currentQuery, queryChanged);
   };
 
   return (
@@ -19,7 +20,7 @@ const MainSearch = function({ handleSearch }) {
           type="text"
           placeholder="Start image searching"
           value={value}
-          onChange={handleOnChange} />
+          onChange={handleChange} />
       </div>
     </div>
   );
