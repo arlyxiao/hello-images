@@ -11,12 +11,13 @@ import OrderSearch from "./shared/OrderSearch";
 
 
 const Search = () => {
+  const pagination = useSelector((state) => state.pagination);
   const imageData = useSelector((state) => state.images);
   const [loading, setLoading] = useState(false);
 
   React.useEffect(() => {
     setLoading(true);
-  }, [imageData]);
+  }, [pagination.page]);
 
   React.useEffect(() => {
     setLoading(false);

@@ -22,14 +22,17 @@ const queryParams = (state = {}, action) => {
   return state;
 };
 
-const currentPage = (state = 1, action) => {
-
+const paginationState = {
+  perPage: 20,
+  page: 1
+};
+const pagination = (state = paginationState, action) => {
   switch (action.type) {
     case "start_page":
-      return 1;
+      return Object.assign({}, state, {page: 1});
 
     case "increase_page":
-      return action.value + 1;
+      return Object.assign({}, state, {page: action.value + 1});
 
     default:
       return state;
@@ -40,7 +43,7 @@ const currentPage = (state = 1, action) => {
 const rootReducer = combineReducers({
   images,
   queryParams,
-  currentPage
+  pagination
 });
 
 

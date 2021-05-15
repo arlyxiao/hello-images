@@ -10,7 +10,7 @@ const SearchWrapper = function({ Component, hasInfiniteScrolling }) {
   let timerId;
   const dispatch = useDispatch();
   let queryParams = useSelector((state) => state.queryParams);
-  let currentPage = useSelector((state) => state.currentPage);
+  let pagination = useSelector((state) => state.pagination);
 
   let [isFetching, setIsFetching] = [null, null];
   if (hasInfiniteScrolling) {
@@ -18,10 +18,12 @@ const SearchWrapper = function({ Component, hasInfiniteScrolling }) {
   }
 
   function handleSearch(currentQuery, queryChanged) {
-    currentPage = queryChanged ? 1 : currentPage;
+    console.log(pagination)
+    const perPage = pagination.perPage;
+    const currentPage = queryChanged ? 1 : pagination.page;
     queryParams = Object.assign({}, queryParams, currentQuery);
     const queryText = DataLoader.buildQueryText(queryParams);
-    let url =  `${DataLoader.baseUrl}${queryText}&page=${currentPage}`;
+    let url =  `${DataLoader.baseUrl}${queryText}&per_page=${perPage}&page=${currentPage}`;
 
     clearTimeout(timerId);
     timerId = setTimeout(function() {
