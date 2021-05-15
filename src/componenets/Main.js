@@ -14,8 +14,6 @@ const Search = () => {
   const imageData = useSelector((state) => state.images);
   const [loading, setLoading] = useState(false);
 
-  const showLoadingPanel = loading ? <LoadingPanel /> : "";
-
   React.useEffect(() => {
     setLoading(true);
   }, [imageData]);
@@ -37,9 +35,9 @@ const Search = () => {
       </section>
 
       <section className="image-list">
-        <ImageLoader images={imageData} loading={loading} />
 
-        {showLoadingPanel}
+        <ImageLoader images={imageData} />
+        {loading ? <LoadingPanel /> : ""}
       </section>
 
 
