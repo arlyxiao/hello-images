@@ -13,7 +13,6 @@ export const buildQueryText = function(queryParams) {
 };
 
 export const doFetch = function(url, success, error) {
-
   fetch(url)
       .then(res => res.json())
       .then(

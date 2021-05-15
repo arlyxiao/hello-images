@@ -1,3 +1,13 @@
-test('adds 1 + 2 to equal 3', () => {
-  expect(1+2).toBe(3);
+import { buildQueryText } from "./src/services/DataLoader";
+
+
+test('buildQueryText', () => {
+  const queryParams = {
+    name1: "test1",
+    name2: "test2"
+  }
+
+  const result = buildQueryText(queryParams);
+  const expected = "&name1=test1&name2=test2";
+  expect(result).toBe(expected);
 });
