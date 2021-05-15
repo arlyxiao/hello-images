@@ -25,7 +25,6 @@ const Search = () => {
 
   return (
     <BaseLayout>
-
       <section className="search">
         <SearchWrapper Component={MainSearch} hasInfiniteScrolling={true} />
 
@@ -41,8 +40,6 @@ const Search = () => {
         <ImageLoader images={imageData} />
         {loading ? <LoadingPanel /> : ""}
       </section>
-
-
     </BaseLayout>
   )
 }

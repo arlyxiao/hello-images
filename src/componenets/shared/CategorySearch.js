@@ -4,7 +4,6 @@ import SelectOptions from "./SelectOptions";
 
 
 const CategorySearch = function({ handleSearch }) {
-
   const optionsData = {
     key: "category",
     label: "Category",

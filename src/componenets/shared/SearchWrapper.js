@@ -1,7 +1,10 @@
-import React, {useState} from "react";
+import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 
-import * as DataLoader from "../../services/DataLoader";
+import {
+  buildUrlByQuery,
+  doFetch
+} from "../../services/DataLoader";
 import useInfiniteScroll from "../hooks/useInfiniteScroll";
 
 
@@ -18,16 +21,12 @@ const SearchWrapper = function({ Component, hasInfiniteScrolling }) {
   }
 
   function handleSearch(currentQuery, queryChanged) {
-    console.log(pagination)
-    const perPage = pagination.perPage;
     const currentPage = queryChanged ? 1 : pagination.page;
-    queryParams = Object.assign({}, queryParams, currentQuery);
-    const queryText = DataLoader.buildQueryText(queryParams);
-    let url =  `${DataLoader.baseUrl}${queryText}&per_page=${perPage}&page=${currentPage}`;
+    const currentPagination = Object.assign({}, pagination, {page: currentPage});
+    const url = buildUrlByQuery(queryParams, currentQuery, currentPagination);
 
     clearTimeout(timerId);
     timerId = setTimeout(function() {
-
       dispatch({
         type: "merge_query",
         value: currentQuery
@@ -38,8 +37,7 @@ const SearchWrapper = function({ Component, hasInfiniteScrolling }) {
         value: currentPage
       });
 
-      DataLoader.doFetch(url, function(result) {
-
+      doFetch(url, function(result) {
         dispatch({
           type: currentPage === 1 ? "first_loading" : "merge_images",
           value: result.hits

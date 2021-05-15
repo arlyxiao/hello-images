@@ -4,7 +4,6 @@ import SelectOptions from "./SelectOptions";
 
 
 const OrderSearch = function({ handleSearch }) {
-
   const optionsData = {
     key: "order",
     label: "Order",

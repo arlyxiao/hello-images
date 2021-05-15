@@ -1,6 +1,5 @@
-# empty-project
-
-Hello Images.
+# hello-images
+Make image search easier.
 
 ### Requirements
 1. Follow the node version in .nvmrc.

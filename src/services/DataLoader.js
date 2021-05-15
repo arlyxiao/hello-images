@@ -12,6 +12,14 @@ export const buildQueryText = function(queryParams) {
   return data;
 };
 
+export const buildUrlByQuery = function(queryParams, currentQuery, pagniation) {
+  const mergedParams = Object.assign({}, queryParams, currentQuery);
+  const queryText = buildQueryText(mergedParams);
+  const url =  `${baseUrl}${queryText}&per_page=${pagniation.perPage}&page=${pagniation.page}`;
+
+  return url;
+}
+
 export const doFetch = function(url, success, error) {
   fetch(url)
       .then(res => res.json())
