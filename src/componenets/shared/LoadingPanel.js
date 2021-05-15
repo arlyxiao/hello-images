@@ -1,5 +1,6 @@
 import React from "react";
 
+
 const LoadingPanel = function() {
   return (
     <section className="loading-panel">
