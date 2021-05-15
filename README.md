@@ -7,7 +7,7 @@ Hello Images.
 
 ## Building and running on localhost
 
-Prepare env variables with right value:
+Prepare env variables with right value (for example: **API_KEY**):
 ```
 cp .env.example .env.local
 ```
