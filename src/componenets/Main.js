@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { useSelector } from 'react-redux';
 
 import BaseLayout from "./layouts/BaseLayout";
@@ -35,8 +35,7 @@ const Search = () => {
         </div>
       </section>
 
-      <section className="image-list">
-
+      <section className="image-list fade-in">
         <ImageLoader images={imageData} />
         {loading ? <LoadingPanel /> : ""}
       </section>
