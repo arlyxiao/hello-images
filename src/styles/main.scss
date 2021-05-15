@@ -69,8 +69,8 @@ section.search {
   position: relative;
   display: flex;
   align-items: center;
-  width: fit-content;
   min-width: 150px;
+  height: 32px;
 
   label {
     font-weight: $bold;
@@ -101,12 +101,14 @@ section.search {
   }
 
   ul {
-    width: 160px;
+    position: absolute;
+    top: 0;
     padding: 0;
     margin: 0;
     border: 2px solid #dedede;
     border-top: none;
     background: #fff;
+    width: 100%;
     z-index: 1;
 
     li {
