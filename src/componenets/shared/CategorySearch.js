@@ -17,7 +17,7 @@ const CategorySearch = function({ handleSearch }) {
 
 
   return (
-    <div className="category-search">
+    <div className="search-field">
 
       <SelectOptions handleSearch={handleSearch} optionsData={optionsData} />
 

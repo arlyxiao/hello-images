@@ -17,7 +17,7 @@ const OrderSearch = function({ handleSearch }) {
 
 
   return (
-    <div className="order-search">
+    <div className="search-field">
 
       <SelectOptions handleSearch={handleSearch} optionsData={optionsData} />
 

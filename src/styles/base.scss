@@ -1,0 +1,21 @@
+$thin: 100;
+$lighter: 200;
+$light: 300;
+$regular: 400;
+$medium: 500;
+$semibold: 600;
+$bold: 700;
+$extrabold: 800;
+$black: 900;
+
+$lato-font: "Lato", Arial, sans-serif;
+
+
+html, body {
+  font-family: $lato-font;
+  font-size: 16px;
+}
+
+.hide {
+  display: none;
+}

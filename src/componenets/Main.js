@@ -30,6 +30,7 @@ const Search = () => {
         <SearchWrapper Component={MainSearch} hasInfiniteScrolling={true} />
 
         <div className="optional-search">
+          <label className="options">Options: </label>
           <SearchWrapper Component={CategorySearch} />
           <SearchWrapper Component={OrderSearch} />
         </div>
