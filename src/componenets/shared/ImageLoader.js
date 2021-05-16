@@ -31,7 +31,7 @@ const ImageLoader = function(props) {
   return (
     <>
       <ul>
-        {images.length > 0 && props.images.map((image) =>
+        {images.length > 0 && images.map((image) =>
           <li key={image.largeImageURL} >
             <LazyImage src={image.userImageURL} />
 
