@@ -6,7 +6,7 @@ export const baseUrl = (function() {
 export const buildQueryText = function(queryParams) {
   let data = "";
   Object.keys(queryParams).forEach(function(key) {
-    data = `${data}&${key}=${queryParams[key]}`;
+    data = `${data}&${key}=${encodeURIComponent(queryParams[key])}`;
   });
 
   return data;
