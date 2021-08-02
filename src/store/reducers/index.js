@@ -24,7 +24,8 @@ const queryParams = (state = {}, action) => {
 
 const paginationState = {
   perPage: 20,
-  page: 1
+  page: 1,
+  aborterList: [new AbortController()]
 };
 const pagination = (state = paginationState, action) => {
   switch (action.type) {
@@ -33,6 +34,13 @@ const pagination = (state = paginationState, action) => {
 
     case "increase_page":
       return {...state, page: action.value + 1};
+
+    case "set_aborter":
+      let newList = [...state.aborterList, action.value];
+      if (newList.length > 2) {
+        newList.shift();
+      }
+      return {...state, aborterList: newList}
 
     default:
       return state;

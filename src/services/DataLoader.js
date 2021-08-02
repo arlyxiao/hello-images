@@ -20,23 +20,8 @@ export const buildUrlByQuery = function(queryParams, currentQuery, pagniation) {
   return url;
 }
 
-export const doFetch = function(url, success, error) {
-  fetch(url)
-      .then(res => res.json())
-      .then(
-        (result) => {
-          // console.log(result);
-          if (typeof success === "function") {
-            success(result);
-          }
-
-        (error) => {
-          // console.log("error....");
-          if (typeof error === "function") {
-            error();
-          }
-        }
-      }
-    )
+export const doFetch = function(url, signal) {
+  return fetch(url, {signal})
+           .then(res => res.json());
 };
 
