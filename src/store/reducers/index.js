@@ -16,7 +16,7 @@ const images = (state = {}, action) => {
 
 const queryParams = (state = {}, action) => {
   if (action.type === "merge_query") {
-    return Object.assign({}, state, action.value);
+    return {...state, ...action.value};
   }
 
   return state;
@@ -29,10 +29,10 @@ const paginationState = {
 const pagination = (state = paginationState, action) => {
   switch (action.type) {
     case "start_page":
-      return Object.assign({}, state, {page: 1});
+      return {...state, page: 1};
 
     case "increase_page":
-      return Object.assign({}, state, {page: action.value + 1});
+      return {...state, page: action.value + 1};
 
     default:
       return state;

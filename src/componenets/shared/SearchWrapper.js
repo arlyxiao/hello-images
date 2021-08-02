@@ -22,7 +22,7 @@ const SearchWrapper = function({ Component, hasInfiniteScrolling }) {
 
   function handleSearch(currentQuery, queryChanged) {
     const currentPage = queryChanged ? 1 : pagination.page;
-    const currentPagination = Object.assign({}, pagination, {page: currentPage});
+    const currentPagination = {...pagination, page: currentPage};
     const url = buildUrlByQuery(queryParams, currentQuery, currentPagination);
 
     clearTimeout(timerId);
