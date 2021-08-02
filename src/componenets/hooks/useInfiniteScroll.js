@@ -18,7 +18,7 @@ const useInfiniteScroll = (callback) => {
 
   function isScrolling() {
     const offset = window.innerHeight + document.documentElement.scrollTop
-    if (offset === document.documentElement.offsetHeight && !isFetching) {
+    if (Math.floor(offset) === document.documentElement.offsetHeight && !isFetching) {
       setIsFetching(true);
     }
   }
